@@ -6,6 +6,9 @@ import random
 #I want each base to have an equal amount of chances 
 
 
+
+# I think this idea will fix it. Remove function 'player_1_choice' and 'player_2_choice' so then they are global variables and they have no
+# issues being called
 random_chance_1 = random.randrange(20, 0, -1)
 random_chance_2 = random.randrange(20, 0, -1)
 
@@ -16,79 +19,78 @@ Squirtle  = {"Name": "Squirtle", "Type": "Water", "Health": 44, "Attack": 48, "D
 Bulbasaur = {"Name": "Bulbasaur", "Type": "Grass", "Health": 45, "Attack": 49, "Defense": 10, "Speed": 45,
 "Moves": ["Tackle", "Growl", "Vine whip"]}
 
+#Determines player 1's pokemon
 starter_pokemon = str(Charmander["Name"]) + ", " +  str(Squirtle["Name"]) + ", or " + str(Bulbasaur["Name"])
-
-
-player_1_pokemon = input("What pokemon do you want? Choose from " + starter_pokemon + " ")
-if player_1_pokemon == "Charmander" or player_1_pokemon == "charmander":
+print("Player 1. What pokemon do you want? Choose from " + starter_pokemon)
+raw_starter_pokemon = input()
+if raw_starter_pokemon == "Charmander" or raw_starter_pokemon == "charmander":
     print(Charmander)
     Confirmation = input("Are you sure you want to choose this pokemon? Yes or no!")
     if Confirmation == "Yes" or Confirmation == "yes":
-        print("Your starter pokemon is now " + player_1_pokemon)
+        print("Your starter pokemon is now " + Charmander["Name"])
+        player_1_pokemon = Charmander
     else:
         if Confirmation == "No" or Confirmation == "no":
             print("Restart program!")
             #In the future make it restart the program if it isn't yes or Yes
-
-elif player_1_pokemon == "Squirtle" or player_1_pokemon == "squirtle":
+elif raw_starter_pokemon == "Squirtle" or raw_starter_pokemon == "squirtle":
     print(Squirtle)
     Confirmation = input("Are you sure you want to choose this pokemon? Yes or no!")
     if Confirmation == "Yes" or Confirmation == "yes":
-        print("Your starter pokemon is now " + player_1_pokemon)
+        print("Your starter pokemon is now " + Squirtle["Name"])
+        player_1_pokemon = Squirtle
     else:
         if Confirmation == "No" or Confirmation == "no":
             print("Restart Program!")
             #In the future make it restart the program if it isn't yes or Yes
-
-elif player_1_pokemon == "Bulbasaur" or player_1_pokemon == "bulbasaur":
+elif raw_starter_pokemon == "Bulbasaur" or raw_starter_pokemon == "bulbasaur":
     print(Bulbasaur)
     Confirmation = input("Are you sure you want to choose this pokemon? Yes or no!")
     if Confirmation == "Yes" or Confirmation == "yes":
-        print("Your starter pokemon is now " + player_1_pokemon)
+        print("Your starter pokemon is now " + Bulbasaur["Name"])
+        player_1_pokemon = Bulbasaur
     else:
         if Confirmation == "No" or Confirmation == "no":
             print("Restart Program!")
             #In the future make it restart the program if it isn't yes or Yes
-
 else:
     print("You have either not picked a valid pokemon, or this pokemon is not a starter!")
 
-player_2_pokemon = input("What pokemon do you want? Choose from " + starter_pokemon + " ")
-if player_2_pokemon == "Charmander" or player_2_pokemon == "charmander":
+#Determines Player 2's pokemon
+print("Player 2. What pokemon do you want? Choose from " + starter_pokemon)
+raw_starter_pokemon = input()
+if raw_starter_pokemon == "Charmander" or raw_starter_pokemon == "charmander":
     print(Charmander)
     Confirmation = input("Are you sure you want to choose this pokemon? Yes or no!")
     if Confirmation == "Yes" or Confirmation == "yes":
-        print("Your starter pokemon is now " + player_2_pokemon)
+        print("Your starter pokemon is now " + Charmander["Name"])
+        player_2_pokemon = Charmander
     else:
         if Confirmation == "No" or Confirmation == "no":
             print("Restart program!")
             #In the future make it restart the program if it isn't yes or Yes
-
-elif player_2_pokemon == "Squirtle" or player_2_pokemon == "squirtle":
+elif raw_starter_pokemon == "Squirtle" or raw_starter_pokemon == "squirtle":
     print(Squirtle)
     Confirmation = input("Are you sure you want to choose this pokemon? Yes or no!")
     if Confirmation == "Yes" or Confirmation == "yes":
-        print("Your starter pokemon is now " + player_2_pokemon)
+        print("Your starter pokemon is now " + Squirtle["Name"])
+        player_2_pokemon = Squirtle
     else:
         if Confirmation == "No" or Confirmation == "no":
             print("Restart Program!")
             #In the future make it restart the program if it isn't yes or Yes
-
-elif player_2_pokemon == "Bulbasaur" or player_2_pokemon == "bulbasaur":
+elif raw_starter_pokemon == "Bulbasaur" or raw_starter_pokemon == "bulbasaur":
     print(Bulbasaur)
     Confirmation = input("Are you sure you want to choose this pokemon? Yes or no!")
     if Confirmation == "Yes" or Confirmation == "yes":
-        print("Your starter pokemon is now " + player_2_pokemon)
+        print("Your starter pokemon is now " + Bulbasaur["Name"])
+        player_2_pokemon = Bulbasaur
     else:
         if Confirmation == "No" or Confirmation == "no":
             print("Restart Program!")
             #In the future make it restart the program if it isn't yes or Yes
-
 else:
-    if str(player_1_pokemon) == str(player_2_pokemon):
-        print("You must have a different pokemon than your oponnent")
-    else:
-        print("You have either not picked a valid pokemon, or this pokemon is not a starter!")
+    print("You have either not picked a valid pokemon, or this pokemon is not a starter!")
 
 #error with string indices. I think that it's messing up because it's slicing info as a string, not sure how to fix currently
 #Try creating variables adding this to the pokemon that we can use down here
