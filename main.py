@@ -98,16 +98,16 @@ else:
 def attribute_modifier_1():
     "Gives the pokemon an attribute boost"
     if random_chance_1 in range(0, 21, 5):
-        print("This pokemon now has the 'health' attribute")
+        print(str(player_1_pokemon["Name"]) + " now has the 'health' attribute")
         player_1_pokemon["Health"] += 10
     elif random_chance_1 in range(1, 21, 5):
-        print("This pokemon now has the 'attack' attribute")
+        print(str(player_1_pokemon["Name"]) + " now has the 'attack' attribute")
         player_1_pokemon["Attack"] += 10
     elif random_chance_1 in range(2, 21, 5):
-        print("This pokemon now has the 'defense' attribute")
+        print(str(player_1_pokemon["Name"]) + " now has the 'defense' attribute")
         player_1_pokemon["Defense"] += 10
     elif random_chance_1 in range(3, 21, 5):
-        print("This pokemon now has the 'speed' attribute")
+        print(str(player_1_pokemon["Name"]) + " now has the 'speed' attribute")
         player_1_pokemon["Speed"] += 10
     elif random_chance_1 in range(4, 21, 5):
         print("Lucked out!")
@@ -117,16 +117,16 @@ def attribute_modifier_1():
 def attribute_modifier_2():
     "Gives the pokemon an attribute boost"
     if random_chance_2 in range(0, 21, 5):
-        print("This pokemon now has the 'health' attribute")
+        print(str(player_2_pokemon["Name"]) + "now has the 'health' attribute")
         player_2_pokemon["Health"] += 10
     elif random_chance_2 in range(1, 21, 5):
-        print("This pokemon now has the 'attack' attribute")
+        print(str(player_2_pokemon["Name"]) + "now has the 'attack' attribute")
         player_2_pokemon["Attack"] += 10
     elif random_chance_2 in range(2, 21, 5):
-        print("This pokemon now has the 'defense' attribute")
+        print(str(player_2_pokemon["Name"]) + "now has the 'defense' attribute")
         player_2_pokemon["Defense"]+= 10
-    elif random_chance_1 in range(3, 21, 5):
-        print("This pokemon now has the 'speed' attribute")
+    elif random_chance_2 in range(3, 21, 5):
+        print(str(player_2_pokemon["Name"]) + "now has the 'speed' attribute")
         player_2_pokemon["Speed"] += 10
     elif random_chance_2 in range(4, 21, 5):
         print("Lucked out!")
@@ -141,23 +141,23 @@ def rock_paper_scissors():
     "Has the rock paper scissor mechanic to determine type and apply damage"
     if player_1_pokemon == "Fire":
         if player_2_pokemon == "Grass":
-            damage += 5
+            player_1_pokemon["Attack"] += 5
     if player_1_pokemon["Type"] == "Water":
         if player_2_pokemon["Type"] == "Fire":
-            damage += 5
+            player_1_pokemon["Attack"] += 5
     if player_1_pokemon["Type"] == "Grass":
         if player_2_pokemon["Type"] == "Water":
-            damage += 5
+            player_1_pokemon["Attack"] += 5
     
     if player_2_pokemon == "Fire":
         if player_1_pokemon == "Grass":
-            damage += 5
+            player_2_pokemon["Attack"] += 5
     if player_2_pokemon["Type"] == "Water":
         if player_1_pokemon["Type"] == "Fire":
-            damage += 5
+            player_2_pokemon["Attack"] += 5
     if player_2_pokemon["Type"] == "Grass":
         if player_1_pokemon["Type"] == "Water":
-            damage += 5
+            player_2_pokemon["Attack"] += 5
 
 def attack():
     # Take into account the speed, which determines who goes first.
