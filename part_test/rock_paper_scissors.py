@@ -10,7 +10,7 @@ Bulbasaur = {"Name": "Bulbasaur", "Type": "Grass", "Health": 45, "Attack": 49, "
 
 player_1_pokemon = Squirtle
 player_2_pokemon = Charmander
-def rock_paper_scissors():
+def rock_paper_scissors_1():
     if player_1_pokemon["Type"] == "Fire":
         if player_2_pokemon["Type"] == "Grass":
             player_1_pokemon["Attack"] += 5
@@ -21,7 +21,7 @@ def rock_paper_scissors():
     if player_1_pokemon["Type"] == "Grass":
         if player_2_pokemon["Type"] == "Water":
             player_1_pokemon["Attack"] += 5
-    
+def rock_paper_scissors_2():
     if player_2_pokemon["Type"] == "Fire":
         if player_1_pokemon["Type"] == "Grass":
             player_2_pokemon["Attack"] += 5
@@ -31,28 +31,3 @@ def rock_paper_scissors():
     if player_2_pokemon["Type"] == "Grass":
         if player_1_pokemon["Type"] == "Water":
             player_2_pokemon["Attack"] += 5
-
-
-
-
-
-def attack():
-    if player_1_pokemon["Speed"] > player_2_pokemon["Speed"]:
-        subtracted_damage = player_1_pokemon["Attack"] - player_2_pokemon["Defense"]
-        player_2_pokemon["Health"] -= subtracted_damage
-        print("Attack complete")
-
-
-#Have two functions, one for each attack, if I don't then it won't work
-#Alternatively I can have two if statements in the same function, and hope it works. Will have to test though
-
-#This is before the function is called 
-print(player_1_pokemon["Attack"])
-#Player 2's damage dealt is updated and printed
-rock_paper_scissors()
-print(player_1_pokemon["Attack"])
-print(Charmander)
-print(Squirtle)
-attack()
-print(Charmander)
-print(Squirtle)

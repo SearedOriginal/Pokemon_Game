@@ -12,13 +12,14 @@ import random
 random_chance_1 = random.randrange(20, 0, -1)
 random_chance_2 = random.randrange(20, 0, -1)
 
-Charmander = {"Name": "Charmander", "Type": "Fire", "Health": 39, "Attack": 52, "Defense": 8, "Speed": 65, 
+Charmander = {"Name": "Charmander", "Type": "Fire", "Health": 195, "Attack": 52, "Defense": 8, "Speed": 65, 
 "Moves": ["Scratch", "Growl", "Ember"]}
-Squirtle  = {"Name": "Squirtle", "Type": "Water", "Health": 44, "Attack": 48, "Defense": 13, "Speed": 43, 
+Squirtle  = {"Name": "Squirtle", "Type": "Water", "Health": 220, "Attack": 48, "Defense": 13, "Speed": 43, 
 "Moves": ["Tackle", "Tail whip", "Water gun"]}
-Bulbasaur = {"Name": "Bulbasaur", "Type": "Grass", "Health": 45, "Attack": 49, "Defense": 10, "Speed": 45,
+Bulbasaur = {"Name": "Bulbasaur", "Type": "Grass", "Health": 225, "Attack": 1, "Defense": 10, "Speed": 45,
 "Moves": ["Tackle", "Growl", "Vine whip"]}
 
+#bulbasaur["Attack"] = 49
 #Determines player 1's pokemon
 starter_pokemon = str(Charmander["Name"]) + ", " +  str(Squirtle["Name"]) + ", or " + str(Bulbasaur["Name"])
 print("Player 1. What pokemon do you want? Choose from " + starter_pokemon)
@@ -137,8 +138,7 @@ def attribute_modifier_2():
 
 # This will be the rock paper scissors mechanic 
 # Fire beats grass. Grass beats water. Water beats fire. 
-def rock_paper_scissors():
-    "Has the rock paper scissor mechanic to determine type and apply damage"
+def rock_paper_scissors_1():
     if player_1_pokemon["Type"] == "Fire":
         if player_2_pokemon["Type"] == "Grass":
             player_1_pokemon["Attack"] += 5
@@ -148,7 +148,7 @@ def rock_paper_scissors():
     if player_1_pokemon["Type"] == "Grass":
         if player_2_pokemon["Type"] == "Water":
             player_1_pokemon["Attack"] += 5
-    
+def rock_paper_scissors_2():
     if player_2_pokemon["Type"] == "Fire":
         if player_1_pokemon["Type"] == "Grass":
             player_2_pokemon["Attack"] += 5
@@ -158,37 +158,34 @@ def rock_paper_scissors():
     if player_2_pokemon["Type"] == "Grass":
         if player_1_pokemon["Type"] == "Water":
             player_2_pokemon["Attack"] += 5
+#Have two functions, one for each attack, if I don't then it won't work
+#Alternatively I can have two if statements in the same function, and hope it works. Will have to test though
 
-def attack():
-    # Take into account the speed, which determines who goes first.
-    # Take into account defense which mitigates damage
-    # Take into account attack which determines how much damage is done
-    # Subtract final damage from health
-    "Executes the attack"
+def first_attack():
+    if player_1_pokemon["Speed"] > player_2_pokemon["Speed"]:
+        subtracted_damage = player_1_pokemon["Attack"] - player_2_pokemon["Defense"]
+        player_2_pokemon["Health"] -= subtracted_damage
+        print("Attack complete for player 1")
+
+def second_attack():
     if player_1_pokemon["Speed"] < player_2_pokemon["Speed"]:
-        damage = player_1_pokemon["Attack"] - player_2_pokemon["Defense"]
-        player_2_pokemon["Health"] -= damage
-        damage = 0
-    elif player_1_pokemon["Speed"] > player_2_pokemon["Speed"]:
-        damage = player_2_pokemon["Attack"] - player_1_pokemon["Defense"]
-        player_1_pokemon["Health"] -= damage
-        damage = 0
-    else:
-        return None
+        subtracted_damage = player_2_pokemon["Attack"] - player_1_pokemon["Defense"]
+        player_1_pokemon["Health"] -= subtracted_damage
+        print("Attack complete for player 2")
 
+#Have two functions, one for each attack, if I don't then it won't work
+#Alternatively I can have two if statements in the same function, and hope it works. Will have to test though
 def main():
-    "Main block of code that puts everything together"
-    attribute_modifier_1()
-    attribute_modifier_2()
-    while player_1_pokemon["Health"] != 0 or player_2_pokemon["Health"] != 0:
-        rock_paper_scissors()
-        attack()
-    if player_1_pokemon["Health"] == 0:
-        print(str(player_1_pokemon) + " Loses, " + str(player_2_pokemon) + " Wins!")
-    elif player_2_pokemon["Health"] == 0:
-        print(str(player_2_pokemon) + " Loses, " + str(player_1_pokemon) + " Wins!")
-    else:
-        print("Probably broken")
-
+    rock_paper_scissors_1()
+    rock_paper_scissors_2()
+    while player_1_pokemon["Health"] <= 0 or player_2_pokemon["Health"] <= 0:
+        first_attack()
+        second_attack()
+        print("Turn over")
+    
+    if player_1_pokemon["Health"] >= 0:
+        print("Player 2 wins")
+    elif player_2_pokemon["Health"] >= 0:
+        print("Player 1 wins")
 
 main()
