@@ -1,5 +1,7 @@
 
 import random
+import time
+import sys
 
 #Restart function doesn't work idk whats wrong and I don't know enough to fix it
 
@@ -16,7 +18,7 @@ Charmander = {"Name": "Charmander", "Type": "Fire", "Health": 195, "Attack": 52,
 "Moves": ["Scratch", "Growl", "Ember"]}
 Squirtle  = {"Name": "Squirtle", "Type": "Water", "Health": 220, "Attack": 48, "Defense": 13, "Speed": 43, 
 "Moves": ["Tackle", "Tail whip", "Water gun"]}
-Bulbasaur = {"Name": "Bulbasaur", "Type": "Grass", "Health": 225, "Attack": 1, "Defense": 10, "Speed": 45,
+Bulbasaur = {"Name": "Bulbasaur", "Type": "Grass", "Health": 225, "Attack": 49, "Defense": 10, "Speed": 45,
 "Moves": ["Tackle", "Growl", "Vine whip"]}
 
 #bulbasaur["Attack"] = 49
@@ -93,6 +95,10 @@ elif raw_starter_pokemon == "Bulbasaur" or raw_starter_pokemon == "bulbasaur":
 else:
     print("You have either not picked a valid pokemon, or this pokemon is not a starter!")
 
+def same_pokemon():
+    if player_1_pokemon == player_2_pokemon:
+        sys.exit("You can not have the same pokemon as eachother!")
+
 #error with string indices. I think that it's messing up because it's slicing info as a string, not sure how to fix currently
 #Try creating variables adding this to the pokemon that we can use down here
 #Turns out i used the wrong variable.
@@ -160,32 +166,52 @@ def rock_paper_scissors_2():
             player_2_pokemon["Attack"] += 5
 #Have two functions, one for each attack, if I don't then it won't work
 #Alternatively I can have two if statements in the same function, and hope it works. Will have to test though
+def speed():
+    if player_1_pokemon["Speed"] > player_2_pokemon["Speed"]:
+        first_attack()
+        second_attack()
+    elif player_2_pokemon["Speed"] > player_1_pokemon["Speed"]:
+        second_attack()   
+        first_attack()
 
 def first_attack():
-    if player_1_pokemon["Speed"] > player_2_pokemon["Speed"]:
-        subtracted_damage = player_1_pokemon["Attack"] - player_2_pokemon["Defense"]
-        player_2_pokemon["Health"] -= subtracted_damage
-        print("Attack complete for player 1")
+    subtracted_damage = player_1_pokemon["Attack"] - player_2_pokemon["Defense"]
+    player_2_pokemon["Health"] -= subtracted_damage
+    print("Attack complete for player 1")
 
 def second_attack():
-    if player_1_pokemon["Speed"] < player_2_pokemon["Speed"]:
-        subtracted_damage = player_2_pokemon["Attack"] - player_1_pokemon["Defense"]
-        player_1_pokemon["Health"] -= subtracted_damage
-        print("Attack complete for player 2")
+    subtracted_damage = player_2_pokemon["Attack"] - player_1_pokemon["Defense"]
+    player_1_pokemon["Health"] -= subtracted_damage
+    print("Attack complete for player 2")
 
+def speed():
+    if player_1_pokemon["Speed"] > player_2_pokemon["Speed"]:
+        first_attack()
+        time.sleep(1)
+        second_attack()
+    elif player_2_pokemon["Speed"] > player_1_pokemon["Speed"]:
+        second_attack()   
+        time.sleep(1)
+        first_attack()
+def win():
+    if player_1_pokemon["Health"] <= 0 and player_2_pokemon["Health"] >= 0:
+        sys.exit("Player 2 wins")
+    elif player_2_pokemon["Health"] <= 0 and player_1_pokemon["Health"] >= 0:
+        sys.exit("Player 1 wins")
+    else:
+        sys.exit("Broken")
+#Found the error. When checking speed, the speed doesn't change, so it only executes if the speed is >
+# Fixed it now though
 #Have two functions, one for each attack, if I don't then it won't work
 #Alternatively I can have two if statements in the same function, and hope it works. Will have to test though
 def main():
+    same_pokemon()
     rock_paper_scissors_1()
     rock_paper_scissors_2()
-    while player_1_pokemon["Health"] <= 0 or player_2_pokemon["Health"] <= 0:
-        first_attack()
-        second_attack()
+    while player_1_pokemon["Health"] >= 0 and player_2_pokemon["Health"] >= 0:
+        speed()
+        time.sleep(1)
         print("Turn over")
-    
-    if player_1_pokemon["Health"] >= 0:
-        print("Player 2 wins")
-    elif player_2_pokemon["Health"] >= 0:
-        print("Player 1 wins")
-
+        time.sleep(1)
+    win()
 main()
