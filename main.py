@@ -2,7 +2,7 @@
 import random
 import time
 import sys
-
+import os
 #Restart function doesn't work idk whats wrong and I don't know enough to fix it
 
 #I want each base to have an equal amount of chances 
@@ -20,6 +20,9 @@ Squirtle  = {"Name": "Squirtle", "Type": "Water", "Health": 220, "Attack": 48, "
 "Moves": ["Tackle", "Tail whip", "Water gun"]}
 Bulbasaur = {"Name": "Bulbasaur", "Type": "Grass", "Health": 225, "Attack": 49, "Defense": 10, "Speed": 45,
 "Moves": ["Tackle", "Growl", "Vine whip"]}
+def restart_program():
+    os.execl(python, python, *sys.argv)
+    print("Program restarted")
 
 #bulbasaur["Attack"] = 49
 #Determines player 1's pokemon
@@ -35,7 +38,7 @@ if raw_starter_pokemon == "Charmander" or raw_starter_pokemon == "charmander":
     else:
         if Confirmation == "No" or Confirmation == "no":
             print("Restart program!")
-            #In the future make it restart the program if it isn't yes or Yes
+            restart_program()
 elif raw_starter_pokemon == "Squirtle" or raw_starter_pokemon == "squirtle":
     print(Squirtle)
     Confirmation = input("Are you sure you want to choose this pokemon? Yes or no!")
@@ -45,7 +48,7 @@ elif raw_starter_pokemon == "Squirtle" or raw_starter_pokemon == "squirtle":
     else:
         if Confirmation == "No" or Confirmation == "no":
             print("Restart Program!")
-            #In the future make it restart the program if it isn't yes or Yes
+            restart_program()
 elif raw_starter_pokemon == "Bulbasaur" or raw_starter_pokemon == "bulbasaur":
     print(Bulbasaur)
     Confirmation = input("Are you sure you want to choose this pokemon? Yes or no!")
@@ -55,7 +58,7 @@ elif raw_starter_pokemon == "Bulbasaur" or raw_starter_pokemon == "bulbasaur":
     else:
         if Confirmation == "No" or Confirmation == "no":
             print("Restart Program!")
-            #In the future make it restart the program if it isn't yes or Yes
+            os.execl(python, python, *sys.argv)
 else:
     print("You have either not picked a valid pokemon, or this pokemon is not a starter!")
 
