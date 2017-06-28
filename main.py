@@ -3,15 +3,7 @@ import random
 import time
 import sys
 import os
-#Restart function doesn't work idk whats wrong and I don't know enough to fix it
 
-#I want each base to have an equal amount of chances 
-
-
-
-# I think this idea will fix it. Remove function 'player_1_choice' and 'player_2_choice' so then they are global variables and they have no
-# issues being called
-# About previous comments: Using the global function will fix this fine.
 def main():
     pokemon_pick_1()
     pokemon_pick_2()
@@ -84,7 +76,6 @@ def pokemon_pick_1():
 def pokemon_pick_2():
     "Assigns a pokemon to player 2"
     global player_2_pokemon
-    #Determines Player 2's pokemon
     pokemon()
     print("Player 2. What pokemon do you want? Choose from " + starter_pokemon)
     raw_starter_pokemon = input()
@@ -128,9 +119,6 @@ def restart_program():
     sys.exit("Program restarting")
     #Have to look up how to get file PATH and then launch main.py when executed
 
-#error with string indices. I think that it's messing up because it's slicing info as a string, not sure how to fix currently
-#Try creating variables adding this to the pokemon that we can use down here
-#Turns out i used the wrong variable.
 # Currently broken
 def attribute_modifier_1():
     random_chance_1 = random.randrange(20, 0, -1)
@@ -174,7 +162,6 @@ def attribute_modifier_2():
         print("Borken!")
 
 
-# This will be the rock paper scissors mechanic 
 # Fire beats grass. Grass beats water. Water beats fire. 
 def rock_paper_scissors_1():
     if player_1_pokemon["Type"] == "Fire":
@@ -198,11 +185,7 @@ def rock_paper_scissors_2():
         if player_1_pokemon["Type"] == "Water":
             player_2_pokemon["Attack"] += 5
 
-#Note: Attribute updating currently does not work properly. If an attribute for a pokemon is updated, it prints 'borken' from function 'win()'
 
-
-#Have two functions, one for each attack, if I don't then it won't work
-#Alternatively I can have two if statements in the same function, and hope it works. Will have to test though
 def speed():
     if player_1_pokemon["Speed"] > player_2_pokemon["Speed"]:
         first_attack()
