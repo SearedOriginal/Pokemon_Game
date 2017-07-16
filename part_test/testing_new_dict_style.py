@@ -43,9 +43,8 @@ def same_pokemon():
 
 def test_function():
     "Just a test function to see if everything works so far"
-    Test_attack = int(Player_1_Pokemon.Health) - int(Player_2_Pokemon.Attack)
-    return Test_attack
-
+    Test_attack = Player_1_Pokemon.Health - Player_2_Pokemon.Attack
+    print(Test_attack)
+    # So I'm a little confused on how this works, but when I return it, it returns the value in memory but when I print it it works
 same_pokemon()
-print(test_function)
-    
+test_function()
