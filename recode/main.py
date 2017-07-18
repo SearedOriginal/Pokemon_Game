@@ -19,7 +19,7 @@ pk_types = {
     "Squirtle": PokemonDatabase("Squirtle", "Water", 220, 48, 13, 43),
     "Bulbasaur": PokemonDatabase("Bulbasaur", "Type", 225, 49, 10, 45),
 }
-aaa
+
 def pk_choice():
     "Determines what pokemon the player chooses"
     pokemon_choice = input("What pokemon do you want, choose from this list: {}".format(pk_names))
@@ -43,23 +43,46 @@ def attack(player1, player2):
     Net_damage = player1.Attack - player2.Defense
     player2.Health -= Net_damage
 
-def attacking():
-    "Executes attacks against eachother. Whoever has the higher speed will always attack first"
-    while Player_1_Pokemon.Health != 0 or Player_2_Pokemon.Health != 0:
-        if Player_1_Pokemon.Speed > Player_2_Pokemon.Speed:
-            attack(Player_1_Pokemon, Player_2_Pokemon)
-        if Player_1_Pokemon.Speed < Player_2_Pokemon.Speed:
-            attack(Player_2_Pokemon, Player_1_Pokemon)
+def first_attack():
+    "Executes attacks against eachother based on who has more speed"
+    if Player_1_Pokemon.Speed > Player_2_Pokemon.Speed:
+        attack(Player_1_Pokemon, Player_2_Pokemon)
+        print("Attack executed on {}. New health is now {}".format(
+            Player_2_Pokemon.Name, Player_2_Pokemon.Health))
+        return True
+    elif Player_1_Pokemon.Speed < Player_2_Pokemon.Speed:
+        attack(Player_2_Pokemon, Player_1_Pokemon)
+        print("Attack executed on {}. New health is now {}".format(
+            Player_1_Pokemon.Name, Player_1_Pokemon.Health))
+        return False
+    #If player 1 attacks first, returns true. If player 2 attacks first, return False 
+
+def second_attack():
+    "Executes an attack on the first attacker. The attacked should have gone first in first_attack()"
+    if first_attack == True:
+        #This means player 1 attacked first
+        attack(Player_2_Pokemon, Player_1_Pokemon)
+        print("Attack executed on {}. New health is now {}".format(
+            Player_1_Pokemon.Name, Player_1_Pokemon.Health))
+    elif first_attack == False:
+        #This means player 2 attacked first
+        attack(Player_1_Pokemon, Player_2_Pokemon)
+        print("Attack executed on {}. New health is now {}".format(
+            Player_2_Pokemon.Name, Player_2_Pokemon.Health))
 
 def winner():
     if Player_1_Pokemon.Health >= 0 and Player_2_Pokemon.Health <= 0:
         sys.exit("Player 1 wins!")
-    if Player_1_Pokemon.Health <= 0 and Player_2_Pokemon.Health >= 0:
+        return True
+    if Player_2_Pokemon.Health >= 0 and Player_1_Pokemon.Health <= 0:
         sys.exit("Player 2 wins!")
+        return False
 
 Player_1_Pokemon = pk_choice()
 print("Player 2:")
 Player_2_Pokemon = pk_choice()
 same_pokemon()
-attacking()
-winner()
+while winner != True or winner != False:
+    first_attack()
+    second_attack()
+    winner()
