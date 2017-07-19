@@ -1,5 +1,6 @@
 import sys
 import random
+import time
 pk_names = []
 
 class PokemonDatabase:
@@ -42,33 +43,19 @@ def attack(player1, player2):
     "Passes in which player is attacking which. player1 is the attacker and player2 is the attack-ee"
     Net_damage = player1.Attack - player2.Defense
     player2.Health -= Net_damage
+    print("Attack executed on {}. New health is now {}".format(
+    player2.Name, player2.Health))
 
-def first_attack():
-    "Executes attacks against eachother based on who has more speed"
+def attacking():
+    "Executes attacks against eachother, order of attacks is based on attack speed"
     if Player_1_Pokemon.Speed > Player_2_Pokemon.Speed:
         attack(Player_1_Pokemon, Player_2_Pokemon)
-        print("Attack executed on {}. New health is now {}".format(
-            Player_2_Pokemon.Name, Player_2_Pokemon.Health))
-        return True
+        time.sleep(1)
+        attack(Player_2_Pokemon, Player_1_Pokemon)
     elif Player_1_Pokemon.Speed < Player_2_Pokemon.Speed:
         attack(Player_2_Pokemon, Player_1_Pokemon)
-        print("Attack executed on {}. New health is now {}".format(
-            Player_1_Pokemon.Name, Player_1_Pokemon.Health))
-        return False
-    #If player 1 attacks first, returns true. If player 2 attacks first, return False 
-
-def second_attack():
-    "Executes an attack on the first attacker. The attacked should have gone first in first_attack()"
-    if first_attack == True:
-        #This means player 1 attacked first
-        attack(Player_2_Pokemon, Player_1_Pokemon)
-        print("Attack executed on {}. New health is now {}".format(
-            Player_1_Pokemon.Name, Player_1_Pokemon.Health))
-    elif first_attack == False:
-        #This means player 2 attacked first
+        time.sleep(1)
         attack(Player_1_Pokemon, Player_2_Pokemon)
-        print("Attack executed on {}. New health is now {}".format(
-            Player_2_Pokemon.Name, Player_2_Pokemon.Health))
 
 def winner():
     if Player_1_Pokemon.Health >= 0 and Player_2_Pokemon.Health <= 0:
@@ -83,6 +70,5 @@ print("Player 2:")
 Player_2_Pokemon = pk_choice()
 same_pokemon()
 while winner != True or winner != False:
-    first_attack()
-    second_attack()
+    attacking()
     winner()
