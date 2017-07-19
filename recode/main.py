@@ -18,7 +18,7 @@ class PokemonDatabase:
 pk_types = {
     "Charmander": PokemonDatabase("Charmander", "Fire", 195, 52, 8, 65),
     "Squirtle": PokemonDatabase("Squirtle", "Water", 220, 48, 13, 43),
-    "Bulbasaur": PokemonDatabase("Bulbasaur", "Type", 225, 49, 10, 45),
+    "Bulbasaur": PokemonDatabase("Bulbasaur", "Grass", 225, 49, 10, 45),
 }
 
 def pk_choice():
@@ -60,6 +60,38 @@ def attribute_changes(player):
         SpeedString = base_string.format("Speed", player.Speed, player.Name)
         print(SpeedString)
 
+def rock_paper_scissors(player1, player2):
+    "The mechanic to have buffs to the attack if their type is strong against one, and vice versa"
+    raw_string = "{} Updated attack to {} because {} has type: {}"
+    #RPS is short for "Rock Paper Scissors"
+    if player1.Type == "Fire" or player2.Type == "Fire":
+        if player2.Type == "Grass":
+            player1.Attack += 5
+            RPSFire1 = raw_string.format(player1.Name, player1.Attack, player2.Name, player2.Type)
+            print(RPSFire1)
+        elif player1.Type == "Grass":
+            player2.Attack += 5
+            RPSFire2 = raw_string.format(player2.Name, player2.Attack, player1.Name, player1.Type)
+            print(RPSFire2)
+    if player1.Type == "Grass" or player2.Type == "Grass":
+        if player2.Type == "Water":
+            player1.Attack += 5
+            RPSGrass1 = raw_string.format(player1.Name, player1.Attack, player2.Name, player2.Type)
+            print(RPSGrass1)
+        elif player1.Type == "Water":
+            player2.Attack += 5
+            RPSGrass2 = raw_string.format(player2.Name, player2.Attack, player1.Name, player1.Type)
+            print(RPSGrass2)
+    if player1.Type == "Water" or player2.Type == "Water":
+        if player2.Type == "Fire":
+            player1.Attack += 5
+            RPSWater1 = raw_string.format(player1.Name, player1.Attack, player2.Name, player2.Type)
+            print(RPSWater1)
+        elif player1.Type == "Fire":
+            player2.Attack += 5
+            RPSWater2 = raw_string.format(player2.Name, player2.Attack, player1.Name, player1.Type)
+            print(RPSWater2)
+
 def attack(player1, player2):
     "Passes in which player is attacking which. player1 is the attacker and player2 is the attack-ee"
     Net_damage = player1.Attack - player2.Defense
@@ -92,6 +124,7 @@ Player_1_Pokemon = pk_choice()
 print("Player 2:")
 Player_2_Pokemon = pk_choice()
 same_pokemon()
+rock_paper_scissors(Player_1_Pokemon, Player_2_Pokemon)
 attribute_changes(Player_1_Pokemon)
 attribute_changes(Player_2_Pokemon)
 while winner != True or winner != False:
