@@ -39,6 +39,27 @@ def same_pokemon():
     if Player_1_Pokemon.Name == Player_2_Pokemon.Name:
         sys.exit("ERROR: PLAYER 1 & PLAYER 2 CAN NOT HAVE THE SAME POKEMON")
 
+def attribute_changes(player):
+    "Randomly chooses a stat from the pokemon and buffs it."
+    decisive_number = random.randrange(1, 5)
+    base_string = "{} Updated to {} on {}"
+    if decisive_number == 1:
+        player.Health += 10
+        HealthString = base_string.format("Health", player.Health, player.Name)
+        print(HealthString)
+    if decisive_number == 2:
+        player.Attack += 10
+        AttackString = base_string.format("Attack", player.Attack, player.Name)
+        print(AttackString)
+    if decisive_number == 3:
+        player.Defense += 10
+        DefenseString = base_string.format("Defense", player.Defense, player.Name)
+        print(DefenseString)
+    if decisive_number == 4:
+        player.Speed += 10
+        SpeedString = base_string.format("Speed", player.Speed, player.Name)
+        print(SpeedString)
+
 def attack(player1, player2):
     "Passes in which player is attacking which. player1 is the attacker and player2 is the attack-ee"
     Net_damage = player1.Attack - player2.Defense
@@ -52,10 +73,12 @@ def attacking():
         attack(Player_1_Pokemon, Player_2_Pokemon)
         time.sleep(1)
         attack(Player_2_Pokemon, Player_1_Pokemon)
+        time.sleep(1)
     elif Player_1_Pokemon.Speed < Player_2_Pokemon.Speed:
         attack(Player_2_Pokemon, Player_1_Pokemon)
         time.sleep(1)
         attack(Player_1_Pokemon, Player_2_Pokemon)
+        time.sleep(1)
 
 def winner():
     if Player_1_Pokemon.Health >= 0 and Player_2_Pokemon.Health <= 0:
@@ -69,6 +92,8 @@ Player_1_Pokemon = pk_choice()
 print("Player 2:")
 Player_2_Pokemon = pk_choice()
 same_pokemon()
+attribute_changes(Player_1_Pokemon)
+attribute_changes(Player_2_Pokemon)
 while winner != True or winner != False:
     attacking()
     winner()
