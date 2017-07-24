@@ -2,20 +2,22 @@ import sys
 import random
 import time
 pk_names = []
-
+pk_types = []
 class PokemonDatabase:
     "Stores pokemon statistics"
-    def __init__(self, Name, poki_type, Health, Attack, Defense, Speed):
+    def __init__(self, Name, poki_type, Health, Attack, Defense, Speed, PP):
         self.Name = Name
         self.Type = poki_type
         self.Health = Health
         self.Attack = Attack
         self.Defense = Defense
         self.Speed = Speed
+        self.PP = PP
         pk_names.append(self.Name)
+        pk_types.append(self.Type)
 
-
-pk_types = {
+Pokemons =  {
+    # Add PP attributes to each pokemon
     "Charmander": PokemonDatabase("Charmander", "Fire", 195, 52, 8, 65),
     "Squirtle": PokemonDatabase("Squirtle", "Water", 220, 48, 13, 43),
     "Bulbasaur": PokemonDatabase("Bulbasaur", "Grass", 225, 49, 10, 45),
@@ -43,6 +45,7 @@ def attribute_changes(player):
     "Randomly chooses a stat from the pokemon and buffs it."
     decisive_number = random.randrange(1, 5)
     base_string = "{} Updated to {} on {}"
+    # I need to balance these numbers eventually so they alone don't determine who wins
     if decisive_number == 1:
         player.Health += 10
         HealthString = base_string.format("Health", player.Health, player.Name)
