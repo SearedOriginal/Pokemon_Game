@@ -1,23 +1,16 @@
-class BasicMoves:
-    def __init__(self, Move_Name, Move_Type, Move_Integer, PP_Cost):
-        self.Name = Move_Name
-        self.Type = Move_Type
-        self.Move_Integer = Move_Integer
-        self.PP_Cost = PP_Cost
-
-Moves = {
-    #Stores pokemon moves
-    "Tackle" = BasicMoves("Tackle", "Attack", 40, 35),
-    "Growl" = BasicMoves("Growl", "Stat Change", 0, 40),
-    "Vine Whip" = BasicMoves("Vine Whip", "Attack", 45, 25),
-
-}
-'''
-def move_question():
-    "Gets the move the player wants to execute"
-    pkmn_move = input("")
-'''
-
+from main_file import *
+class Moves:
+    "Defines and uses classes. WIP"
+    Moves_List = []
+    def __init__(self, Name, Damage, Type, Accuracy, TotalPP):
+        self.Name = Name
+        self.Damage = Damage
+        self.Type = move_type
+        self.Accuracy = Accuracy
+        self.TotalPP = TotalPP
+    def PPreduction(Pokemon, Move):
+        if Move in Pokemon.moveList:
+            Move.
 '''
 Plan for the moves:
 find out what move is to be executed, see if the move is in the pokemon databse for that pokemon
@@ -29,3 +22,6 @@ when the attack is executed it needs to return True so then PP can be taken from
 Find out if two pokemon that have the same attack will be a problem, I hope it won't but who knows
 Implement it into main.py
 '''
+Moves_List = [
+    "Tackle", "Growl", "Tail Whip", "Scratch"
+]

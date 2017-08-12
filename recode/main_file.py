@@ -5,22 +5,40 @@ pk_names = []
 pk_types = []
 class PokemonDatabase:
     "Stores pokemon statistics"
-    def __init__(self, Name, poki_type, Health, Attack, Defense, Speed, PP):
+    def __init__(self, Name, poki_type, Health, Attack, Defense, Speed, Move1,
+     Move2="None", Move3="None", Move4="None"):
         self.Name = Name
         self.Type = poki_type
         self.Health = Health
         self.Attack = Attack
         self.Defense = Defense
         self.Speed = Speed
-        self.PP = PP
+        self.Move1 = Move1
+        self.Move2 = Move2
+        self.Move3 = Move3
+        self.Move4 = Move4
         pk_names.append(self.Name)
         pk_types.append(self.Type)
 
+    def Poki_Moves(self):
+        "Creates a list removing None, and then returning the list."
+        moveList = [self.Move1, self.Move2, self.Move3, self.Move4]
+        if "None" in moveList:
+            for move in moveList:
+                if move == "None":
+                    moveList.remove("None")
+                else:
+                    return moveList
+        else:
+            return moveList
+
 Pokemons =  {
-    # Add PP attributes to each pokemon
-    "Charmander": PokemonDatabase("Charmander", "Fire", 195, 52, 8, 65),
-    "Squirtle": PokemonDatabase("Squirtle", "Water", 220, 48, 13, 43),
-    "Bulbasaur": PokemonDatabase("Bulbasaur", "Grass", 225, 49, 10, 45),
+    "Charmander": PokemonDatabase("Charmander", "Fire", 195, 52, 8, 65,
+    "Tackle", "Scratch"),
+    "Squirtle": PokemonDatabase("Squirtle", "Water", 220, 48, 13, 43,
+    "Tackle", "Tail Whip"),
+    "Bulbasaur": PokemonDatabase("Bulbasaur", "Grass", 225, 49, 10, 45,
+    "Tackle", "Growl"),
 }
 
 def pk_choice():
